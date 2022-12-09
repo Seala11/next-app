@@ -1,22 +1,23 @@
-import Link from 'next/link';
 import React from 'react';
-import { Card, FlexContainer, StyledA } from './CardList.styled';
+import MovieItem from './Card';
+import { FlexContainer} from './CardList.styled';
+
+export default function CardList({ movies }) {
+  console.log(movies);
+  return (
+    <FlexContainer>
+      {movies.map((movie) => (
+        <MovieItem key={movie.id} movie={movie}/>
+      ))}
+    </FlexContainer>
+  );
+}
 
 // const StyledLink = ({ href, name }) => (
 //   <Link href={href} passHref legacyBehavior>
 //     <StyledA>{name}</StyledA>
 //   </Link>
 // );
-
-export default function CardList({ movies }) {
-  return (
-    <FlexContainer>
-      {movies.results.map((movie) => (
-        <Card key={movie.id}>{movie.original_title}</Card>
-      ))}
-    </FlexContainer>
-  );
-}
 
 // export default function CardList() {
 //     return (

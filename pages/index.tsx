@@ -60,7 +60,7 @@ export default function Movies({ movies }: InferGetStaticPropsType<typeof getSta
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Title>Movies</Title>
-      <CardList movies={movies}/>
+      <CardList movies={movies.results}/>
     </>
   );
 }
