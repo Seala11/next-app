@@ -2,46 +2,11 @@ import Head from 'next/head';
 import { Title } from '../shared/styles/sharedstyles';
 import { InferGetStaticPropsType } from 'next';
 import CardList from '../Layouts/CardList/CardList';
-
-interface IMovie {
-  poster_path: string;
-  adult: boolean;
-  overview: string;
-  release_date: string;
-  genre_ids: number[];
-  id: number;
-  original_title: string;
-  original_language: string;
-  title: string;
-  backdrop_path: string;
-  popularity: number;
-  vote_count: number;
-  video: boolean;
-  vote_average: number;
-}
-
-interface IMovies {
-  page: number;
-  results: IMovie[];
-  total_results: number;
-  total_pages: number;
-}
-
-const token =
-  'eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxMDZlZDk0MDBmYTE4OTFkN2RhODVhOTJlZTYwZjlhZCIsInN1YiI6IjYzOTI1OGE5ZDdmYmRhMDA4OGJiNzg2NyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.LvYcmSE2-UhKt_QzeH7vIZGUd6_P8jZ93f17NPbZypE';
+import { fetchMovies } from '../shared/api/movieApi';
+import { IMovies } from '../shared/api/types';
 
 export const getStaticProps = async () => {
-  const res = await fetch(
-    'https://api.themoviedb.org/3/discover/movie?&page=1&sort_by=popularity.desc',
-    {
-      method: 'GET',
-      headers: {
-        accept: 'application/json',
-        Authorization: `Bearer ${token}`,
-      },
-    }
-  );
-
+  const res = await fetchMovies();
   const movies: IMovies = await res.json();
 
   return {
@@ -60,7 +25,7 @@ export default function Movies({ movies }: InferGetStaticPropsType<typeof getSta
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Title>Movies</Title>
-      <CardList movies={movies.results}/>
+      <CardList movies={movies.results} />
     </>
   );
 }
