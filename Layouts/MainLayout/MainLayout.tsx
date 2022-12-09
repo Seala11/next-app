@@ -1,4 +1,5 @@
 import React, { ReactElement } from 'react';
+import Meta from '../../components/Meta';
 import Navbar from '../../components/Navbar/Navbar';
 import { Container, Main } from './MainLayout.styled';
 
@@ -9,6 +10,7 @@ type Props = {
 const MainLayout = ({ children }: Props) => {
   return (
     <>
+      <Meta />
       <Navbar />
       <Container>
         <Main>{children}</Main>
