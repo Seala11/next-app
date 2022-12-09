@@ -2,20 +2,10 @@ import styled from 'styled-components'
 
 const Title = styled.h1`
   margin: 0;
-  line-height: 1.15;
-  font-size: 4rem;
-  text-align: center;
-  text-decoration: none;
-
-  a {
-    color: ${({ theme }) => theme.colors.secondary};
-    text-decoration: none;
-    &:hover,
-    :focus,
-    :active {
-      text-decoration: underline;
-    }
-  }
+  font-size: 2.6rem;
+  align-self: flex-start;
+  padding: 3rem 0;
+  font-weight: 400;
 `
 
 export { Title }

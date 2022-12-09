@@ -1,24 +1,27 @@
 import styled from 'styled-components';
 
 const Container = styled.div`
-  background-color: gray;
-  padding: 1rem 3rem;
+  padding: 2.5rem 3rem;
+  background-color: ${({ theme }) => theme.colors.darkL};
 `;
 
 const List = styled.ul`
-  margin: 0;
+  max-width: 120rem;
+  padding: 0;
+  margin: 0 auto;
   list-style: none;
   display: flex;
-  justify-content: center;
+  justify-content: flex-end;
   gap: 2rem;
 `;
 
 const ListItem = styled.li`
-  font-size: 1.6rem;
+  font-size: 2rem;
   font-weight: 400;
+  color: ${({ theme }) => theme.colors.light};
 
   &:hover {
-    color: blue;
+    color: ${({ theme }) => theme.colors.accent};
   }
 `;
 

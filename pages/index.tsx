@@ -8,7 +8,7 @@ import { IMovies } from '../shared/api/types';
 export default function Movies({ movies }: InferGetStaticPropsType<typeof getStaticProps>) {
   return (
     <>
-      <Title>Movies</Title>
+      <Title>Popular Movies</Title>
       <CardList movies={movies.results} />
     </>
   );

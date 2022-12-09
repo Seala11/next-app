@@ -1,13 +1,19 @@
-import { createGlobalStyle } from 'styled-components'
+import { createGlobalStyle } from 'styled-components';
 
 const GlobalStyle = createGlobalStyle`
-  html,
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap');
+
+  html {
+    font-size: 10px;
+  }
+
   body {
-    color: ${({ theme }) => theme.colors.primary};
+    color: ${({ theme }) => theme.colors.light};
+    background-color: ${({ theme }) => theme.colors.dark};
     padding: 0;
     margin: 0;
-    font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-      Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+    font-size: 1.6rem;
+    font-family: 'Inter', sans-serif;
   }
 
   a {
@@ -18,6 +24,6 @@ const GlobalStyle = createGlobalStyle`
   * {
     box-sizing: border-box;
   }
-`
+`;
 
-export default GlobalStyle
+export default GlobalStyle;
