@@ -7,6 +7,7 @@ const FlexContainer = styled.div`
   gap: 1rem;
   row-gap: 2rem;
   max-width: 120rem;
+  padding: 0 0 7rem;
 `;
 
 const Card = styled.div`
