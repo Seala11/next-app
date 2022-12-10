@@ -2,9 +2,10 @@ import type { AppProps } from 'next/app';
 import { DefaultTheme, ThemeProvider } from 'styled-components';
 import MainLayout from '../Layouts/MainLayout/MainLayout';
 import GlobalStyle from '../shared/styles/globalstyles';
-import { Inter } from '@next/font/google'
+import { Inter } from '@next/font/google';
+import { AppProvider } from '../shared/context/appProvider';
 
-const inter = Inter({ subsets: ['latin'] })
+const inter = Inter({ subsets: ['latin'] });
 
 const theme: DefaultTheme = {
   colors: {
@@ -19,15 +20,17 @@ export default function App({ Component, pageProps }: AppProps) {
   return (
     <>
       <ThemeProvider theme={theme}>
-        <GlobalStyle />
-        <style jsx global>{`
-          html {
-            font-family: ${inter.style.fontFamily};
-          }
-        `}</style>
-        <MainLayout>
-          <Component {...pageProps} />
-        </MainLayout>
+        <AppProvider>
+          <GlobalStyle />
+          <style jsx global>{`
+            html {
+              font-family: ${inter.style.fontFamily};
+            }
+          `}</style>
+          <MainLayout>
+            <Component {...pageProps} />
+          </MainLayout>
+        </AppProvider>
       </ThemeProvider>
     </>
   );

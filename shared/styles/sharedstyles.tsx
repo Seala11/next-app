@@ -27,4 +27,9 @@ const Button = styled.button`
   }
 `;
 
-export { Title, Button };
+const LoadButton = styled(Button)`
+  align-self: center;
+  width: 100%;
+`;
+
+export { Title, Button, LoadButton };

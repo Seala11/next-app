@@ -1,21 +1,29 @@
-import Head from 'next/head';
-import { Title } from '../shared/styles/sharedstyles';
+import { LoadButton, Title } from '../shared/styles/sharedstyles';
 import { InferGetStaticPropsType } from 'next';
 import CardList from '../Layouts/CardList/CardList';
 import { fetchMovies } from '../shared/api/movieApi';
 import { IMovies } from '../shared/api/types';
-import { useState } from 'react';
+import { useAppContext } from '../shared/context/appProvider';
+import { useEffect } from 'react';
 
 export default function Movies({ movies }: InferGetStaticPropsType<typeof getStaticProps>) {
-  const [moviesRes, setMoviesRes] = useState(movies.results);
-  const [page, setPage] = useState(movies.page);
+  const { moviesRes, setMoviesRes, page, setPage } = useAppContext();
+
+  useEffect(() => {
+    if (!moviesRes) {
+      setMoviesRes(movies.results);
+      setPage(movies.page);
+    }
+  }, [movies.page, movies.results, moviesRes, setMoviesRes, setPage]);
 
   const dataHandler = async () => {
     try {
       const res = await fetchMovies(`${page + 1}`);
       const movies: IMovies = await res.json();
 
-      const result = moviesRes.concat(movies.results.filter(x => !moviesRes.some(y => y.id == x.id)));
+      const result = moviesRes.concat(
+        movies.results.filter((x) => !moviesRes.some((y) => y.id == x.id))
+      );
       setMoviesRes(() => result);
       setPage(page + 1);
     } catch (err) {
@@ -26,8 +34,8 @@ export default function Movies({ movies }: InferGetStaticPropsType<typeof getSta
   return (
     <>
       <Title>Popular Movies</Title>
-      <CardList movies={moviesRes} />
-      <button onClick={dataHandler}>Load more</button>
+      {moviesRes ? <CardList movies={moviesRes} /> : <CardList movies={movies.results} />}
+      <LoadButton onClick={dataHandler}>Load more</LoadButton>
     </>
   );
 }

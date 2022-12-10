@@ -5,8 +5,13 @@ import Movie from '../../../Layouts/Movie/Movie';
 import { fetchMovieById, fetchMovies } from '../../../shared/api/movieApi';
 import { IMovieDetails, IMovies } from '../../../shared/api/types';
 
-const MoviePage = ({ movie }: InferGetStaticPropsType<typeof getServerSideProps>) => {
-  console.log(movie);
+const MoviePage = ({ movie }: InferGetStaticPropsType<typeof getStaticProps>) => {
+  // const router = useRouter();
+
+  // if (router.isFallback) {
+  //   return <div>Loading...</div>;
+  // }
+
   return (
     <>
       <Meta title={movie.title} />
@@ -17,20 +22,45 @@ const MoviePage = ({ movie }: InferGetStaticPropsType<typeof getServerSideProps>
 
 export default MoviePage;
 
-export const getServerSideProps = async (context) => {
+export const getStaticProps = async (context) => {
   const res = await fetchMovieById(context.params.id);
-
   const movie: IMovieDetails = await res.json();
+
+  if (!res.ok || !movie) {
+    return {
+      notFound: true,
+    };
+  }
 
   return {
     props: {
       movie,
     },
+    revalidate: 1,
   };
 };
 
-// export const getStaticProps = async (context) => {
+export const getStaticPaths = async () => {
+  const res = await fetchMovies();
+  const movies: IMovies = await res.json();
+
+  const ids = movies.results.map((movie) => movie.id);
+  const paths = ids.map((id) => ({ params: { id: `${id}` } }));
+
+  return {
+    paths,
+    fallback: 'blocking',
+  };
+};
+
+// export const getServerSideProps = async (context) => {
 //   const res = await fetchMovieById(context.params.id);
+
+//   if (!res.ok) {
+//     return {
+//       notFound: true,
+//     }
+//   }
 
 //   const movie: IMovieDetails = await res.json();
 
@@ -38,18 +68,5 @@ export const getServerSideProps = async (context) => {
 //     props: {
 //       movie,
 //     },
-//   };
-// };
-
-// export const getStaticPaths = async () => {
-//   const res = await fetchMovies();
-//   const movies: IMovies = await res.json();
-
-//   const ids = movies.results.map((movie) => movie.id);
-//   const paths = ids.map((id) => ({ params: { id: `${id}` } }));
-
-//   return {
-//     paths,
-//     fallback: false,
 //   };
 // };

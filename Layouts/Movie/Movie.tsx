@@ -60,7 +60,7 @@ const Movie = ({ movie }: Props) => {
               ))}
             </TitleWrapper>
 
-            <Tagline>{movie.tagline}</Tagline>
+            {movie.tagline && <Tagline>{movie.tagline}</Tagline>}
             {movie.overview && (
               <>
                 <SubTitle>Overview</SubTitle>

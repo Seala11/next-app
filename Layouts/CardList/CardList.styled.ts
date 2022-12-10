@@ -42,7 +42,8 @@ const Card = styled.div`
     margin: 0;
     padding: 0 1rem 1rem 1rem;
     font-size: 1.4rem;
-    font-weight: 400;
+    font-weight: 300;
+    filter: opacity(0.8);
   }
 `;
 
