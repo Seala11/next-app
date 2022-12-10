@@ -8,10 +8,10 @@ const Container = styled.div`
   align-items: center;
   height: 100vh;
   min-height: 100vh;
+  overflow-x: hidden;
 `;
 
 const Main = styled.main`
-  padding: 2rem 0;
   flex: 1;
   display: flex;
   flex-direction: column;

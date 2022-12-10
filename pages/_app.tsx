@@ -8,7 +8,7 @@ const theme: DefaultTheme = {
     dark: '#10141f',
     darkL: '#161d2f',
     accent: '#586b91',
-    light: '#ffffff',
+    light: '#f5f5f5',
   },
 };
 

@@ -1,35 +1,21 @@
 import { InferGetStaticPropsType } from 'next';
-import Link from 'next/link';
 import React from 'react';
 import Meta from '../../../components/Meta';
+import Movie from '../../../Layouts/Movie/Movie';
 import { fetchMovieById, fetchMovies } from '../../../shared/api/movieApi';
 import { IMovieDetails, IMovies } from '../../../shared/api/types';
 
-const Movie = ({ movie }: InferGetStaticPropsType<typeof getStaticProps>) => {
+const MoviePage = ({ movie }: InferGetStaticPropsType<typeof getStaticProps>) => {
+  console.log(movie);
   return (
     <>
       <Meta title={movie.title} />
-      <div>
-        <Link href={'/'}>Go back</Link>
-        <p>This is a movie {movie.title}</p>
-        <p>A: {movie.adult}</p>
-        <p>B: {movie.backdrop_path}</p>
-        {movie.genres.map((genre) => (
-          <p key={genre.id}>{genre.name}</p>
-        ))}
-        <p>{movie.id}</p>
-        <p>{movie.original_title}</p>
-        <p>{movie.popularity}</p>
-        <p>{movie.video}</p>
-        <p>{movie.vote_count}</p>
-        <p>{movie.vote_average}</p>
-        <p>{movie.original_language}</p>
-      </div>
+      <Movie movie={movie} />
     </>
   );
 };
 
-export default Movie;
+export default MoviePage;
 
 // export const getServerSideProps = async (context) => {
 //   const res = await fetchMovieById(context.params.id);
