@@ -8,4 +8,23 @@ const Title = styled.h1`
   font-weight: 400;
 `;
 
-export { Title };
+const Button = styled.button`
+  cursor: pointer;
+  width: 16rem;
+  height: 6rem;
+  font-size: 1.6rem;
+  font-weight: 400;
+  border: 0.2rem solid ${({ theme }) => theme.colors.accent};
+  border-radius: 1rem;
+  color: ${({ theme }) => theme.colors.light};
+  background-color: transparent;
+  transition: all 0.2s ease-in-out;
+  align-self: baseline;
+  margin: 2rem 0;
+
+  &:hover {
+    background-color: ${({ theme }) => theme.colors.accent};
+  }
+`;
+
+export { Title, Button };

@@ -8,7 +8,6 @@ type Props = {
 };
 
 export default function CardList({ movies }: Props) {
-  // console.log(movies);
   return (
     <FlexContainer>
       {movies.map((movie) => (
