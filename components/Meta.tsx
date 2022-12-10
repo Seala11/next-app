@@ -23,7 +23,8 @@ const Meta = ({ title, keywords, description }: Props) => {
 Meta.defaultProps = {
   title: 'Popular Movies',
   keywords: 'Movies, TV Shows, API',
-  description: 'The Movie Database (TMDB) is a popular, user editable database for movies and TV shows.',
+  description:
+    'The Movie Database (TMDB) is a popular, user editable database for movies and TV shows.',
 };
 
 export default Meta;

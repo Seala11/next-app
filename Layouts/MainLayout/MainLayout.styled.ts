@@ -1,14 +1,12 @@
 import styled from 'styled-components';
 
 const Container = styled.div`
-  padding: 0 0.5rem;
   display: flex;
   flex-flow: column nowrap;
   justify-content: flex-start;
   align-items: center;
   height: 100vh;
   min-height: 100vh;
-  overflow-x: hidden;
 `;
 
 const Main = styled.main`

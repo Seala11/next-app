@@ -1,8 +1,6 @@
 import { createGlobalStyle } from 'styled-components';
 
 const GlobalStyle = createGlobalStyle`
-  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap');
-
   html {
     font-size: 10px;
   }
@@ -13,7 +11,6 @@ const GlobalStyle = createGlobalStyle`
     padding: 0;
     margin: 0;
     font-size: 1.6rem;
-    font-family: 'Inter', sans-serif;
   }
 
   a {
