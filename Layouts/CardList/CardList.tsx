@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { fetchMovies } from '../../shared/api/movieApi';
 import { IMovie, IMovies } from '../../shared/api/types';
 import { useAppContext } from '../../shared/context/appProvider';
@@ -7,18 +7,11 @@ import MovieItem from './Card';
 import { FlexContainer } from './CardList.styled';
 
 type Props = {
-  movies: IMovies;
+  movies: IMovie[];
 };
 
 export default function CardList({ movies }: Props) {
   const { moviesRes, setMoviesRes, page, setPage } = useAppContext();
-
-  useEffect(() => {
-    if (!moviesRes) {
-      setMoviesRes(movies.results);
-      setPage(movies.page);
-    }
-  }, [movies.page, movies.results, moviesRes, setMoviesRes, setPage]);
 
   const dataHandler = async () => {
     try {
@@ -38,8 +31,9 @@ export default function CardList({ movies }: Props) {
   return (
     <>
       <FlexContainer>
-        {!moviesRes && <p>Loading</p>}
-        {moviesRes && moviesRes.map((movie) => <MovieItem key={movie.id} movie={movie} />)}
+        {movies.map((movie) => (
+          <MovieItem key={movie.id} movie={movie} />
+        ))}
       </FlexContainer>
       <LoadButton onClick={dataHandler}>Load more</LoadButton>
     </>

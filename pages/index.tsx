@@ -4,18 +4,37 @@ import CardList from '../Layouts/CardList/CardList';
 import { fetchMovies } from '../shared/api/movieApi';
 import { IMovies } from '../shared/api/types';
 import { useEffect, useState } from 'react';
+import { useAppContext } from '../shared/context/appProvider';
 
 export default function Movies({ movies }: InferGetStaticPropsType<typeof getStaticProps>) {
-  const [hydrated, setHydrated] = useState(false);
+  // const [hydrated, setHydrated] = useState(false);
+
+  const { moviesRes, setMoviesRes, setPage } = useAppContext();
 
   useEffect(() => {
-    setHydrated(true);
-  }, []);
+    if (!moviesRes) {
+      setMoviesRes(movies.results);
+      setPage(movies.page);
+    }
+  }, [movies.page, movies.results, moviesRes, setMoviesRes, setPage]);
+
+  // useEffect(() => {
+  //   setHydrated(true);
+  // }, []);
 
   return (
     <>
-      <Title>Popular Movies</Title>
-      {hydrated && <CardList movies={movies} />}
+      <>
+        <Title>Popular Movies</Title>
+        <CardList movies={moviesRes ? moviesRes : movies.results} />
+      </>
+
+      {/* {hydrated && (
+        <>
+          <Title>Popular Movies</Title>
+          <CardList movies={moviesRes ? moviesRes : movies.results} />
+        </>
+      )} */}
     </>
   );
 }
