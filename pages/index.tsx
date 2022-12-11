@@ -1,14 +1,12 @@
-import { LoadButton, Title } from '../shared/styles/sharedstyles';
+import { Title } from '../shared/styles/sharedstyles';
 import { InferGetStaticPropsType } from 'next';
 import CardList from '../Layouts/CardList/CardList';
 import { fetchMovies } from '../shared/api/movieApi';
 import { IMovies } from '../shared/api/types';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useAppContext } from '../shared/context/appProvider';
 
 export default function Movies({ movies }: InferGetStaticPropsType<typeof getStaticProps>) {
-  // const [hydrated, setHydrated] = useState(false);
-
   const { moviesRes, setMoviesRes, setPage } = useAppContext();
 
   useEffect(() => {
@@ -26,7 +24,7 @@ export default function Movies({ movies }: InferGetStaticPropsType<typeof getSta
     <>
       <>
         <Title>Popular Movies</Title>
-        <CardList movies={moviesRes ? moviesRes : movies.results} />
+        {moviesRes && <CardList movies={moviesRes} />}
       </>
 
       {/* {hydrated && (
