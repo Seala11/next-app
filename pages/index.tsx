@@ -16,23 +16,14 @@ export default function Movies({ movies }: InferGetStaticPropsType<typeof getSta
     }
   }, [movies.page, movies.results, moviesRes, setMoviesRes, setPage]);
 
-  // useEffect(() => {
-  //   setHydrated(true);
-  // }, []);
-
   return (
     <>
-      <>
-        <Title>Popular Movies</Title>
-        {moviesRes && <CardList movies={moviesRes} />}
-      </>
-
-      {/* {hydrated && (
+      {moviesRes && (
         <>
           <Title>Popular Movies</Title>
-          <CardList movies={moviesRes ? moviesRes : movies.results} />
+          <CardList movies={moviesRes} />
         </>
-      )} */}
+      )}
     </>
   );
 }

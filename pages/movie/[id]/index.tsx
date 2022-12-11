@@ -6,12 +6,6 @@ import { fetchMovieById, fetchMovies } from '../../../shared/api/movieApi';
 import { IMovieDetails, IMovies } from '../../../shared/api/types';
 
 const MoviePage = ({ movie }: InferGetStaticPropsType<typeof getStaticProps>) => {
-  // const router = useRouter();
-
-  // if (router.isFallback) {
-  //   return <div>Loading...</div>;
-  // }
-
   return (
     <>
       <Meta title={movie.title} />
