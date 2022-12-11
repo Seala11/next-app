@@ -10,7 +10,7 @@ const Navbar = () => {
           <Link href="/">Movies</Link>
         </ListItem>
         <ListItem>
-          <Link href="/tvshows">TV shows</Link>
+          <Link href="/bookmarked">Bookmarked</Link>
         </ListItem>
       </List>
     </Container>

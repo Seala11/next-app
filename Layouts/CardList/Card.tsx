@@ -15,6 +15,26 @@ export default function MovieItem({ movie }: Props) {
     year: 'numeric',
   });
 
+  const movieHandler = async (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+
+    try {
+      const response = await fetch('/api/movies', {
+        method: 'POST',
+        body: JSON.stringify(movie),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+
+      const data = await response.json();
+      console.log(response, data);
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
   return (
     <Link href="/movie/[id]" as={`/movie/${movie.id}`}>
       <Card key={movie.id}>
@@ -27,6 +47,7 @@ export default function MovieItem({ movie }: Props) {
         <h2>{movie.title}</h2>
         <p>{date}</p>
       </Card>
+      <button onClick={movieHandler}>Add movie</button>
     </Link>
   );
 }
