@@ -1,11 +1,41 @@
-import { createContext, useContext, useState } from 'react';
+import { createContext, useContext, useState, useReducer, SetStateAction } from 'react';
 import { IMovie } from '../api/types';
+import {
+  BookmarkedAction,
+  BookmarkedState,
+  bookmarkPageReducer,
+  initialBookmarkedState,
+} from './bookmarkedPageReducer';
 
-const AppContext = createContext(null);
+export interface IAppContext {
+  bookmarkedPageState: BookmarkedState;
+  bookmarkedPageDispatch: React.Dispatch<BookmarkedAction>;
+  moviesRes: IMovie[];
+  setMoviesRes: React.Dispatch<SetStateAction<IMovie[]>>;
+  page: number;
+  setPage: React.Dispatch<SetStateAction<number>>;
+}
+
+export const defaultContext = {
+  bookmarkedPageState: initialBookmarkedState,
+  bookmarkedPageDispatch: () => {},
+  moviesRes: [],
+  setMoviesRes: () => {},
+  page: 1,
+  setPage: () => {},
+};
+
+const AppContext = createContext<IAppContext>(defaultContext);
+
+export default AppContext;
 
 export function AppProvider({ children }) {
+  const [bookmarkedPageState, bookmarkedPageDispatch] = useReducer(
+    bookmarkPageReducer,
+    initialBookmarkedState
+  );
+
   const [moviesRes, setMoviesRes] = useState<IMovie[]>();
-  const [bookmarkedRes, setBookmarkedRes] = useState<IMovie[]>();
   const [page, setPage] = useState<number>();
 
   return (
@@ -13,8 +43,8 @@ export function AppProvider({ children }) {
       value={{
         moviesRes,
         setMoviesRes,
-        bookmarkedRes,
-        setBookmarkedRes,
+        bookmarkedPageState,
+        bookmarkedPageDispatch,
         page,
         setPage,
       }}

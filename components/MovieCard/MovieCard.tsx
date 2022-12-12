@@ -9,6 +9,7 @@ import { Card, MarkButton } from './movieCard.styled';
 import { MdOutlineBookmarkAdd } from 'react-icons/md';
 import { MdOutlineBookmarkRemove } from 'react-icons/md';
 import { motion } from 'framer-motion';
+import { BookmarkedProviderActions } from '../../shared/context/bookmarkedPageReducer';
 
 export enum Page {
   MOVIES = 'movies',
@@ -22,7 +23,9 @@ type Props = {
 
 export default function MovieCard({ movie, page }: Props) {
   const [pending, setPending] = useState(false);
-  const { bookmarkedRes, setBookmarkedRes } = useAppContext();
+  const { bookmarkedPageState, bookmarkedPageDispatch } = useAppContext();
+  const { bookmarkedMovies } = bookmarkedPageState;
+
   const date = new Date(movie.release_date).toLocaleString('en-US', {
     month: 'short',
     day: 'numeric',
@@ -44,7 +47,7 @@ export default function MovieCard({ movie, page }: Props) {
 
       await response.json();
       toast.info(`${movie.title} added to bookmarked`);
-      setBookmarkedRes((prevRes) => [...prevRes, movie]);
+      bookmarkedPageDispatch({type: BookmarkedProviderActions.ADD_MOVIE, movie: movie})
     } catch (err) {
       if (err.message === '409') {
         toast.info(`${movie.title} already bookmarked`);
@@ -55,11 +58,6 @@ export default function MovieCard({ movie, page }: Props) {
     } finally {
       setPending(false);
     }
-  };
-
-  const removeMovieFromStore = () => {
-    const updatedList = bookmarkedRes.filter((storedMovie) => storedMovie.id !== movie.id);
-    setBookmarkedRes(updatedList);
   };
 
   const removeMovieHandler = async (e: React.MouseEvent) => {
@@ -76,10 +74,10 @@ export default function MovieCard({ movie, page }: Props) {
       }
 
       await response.json();
-      removeMovieFromStore();
+      bookmarkedPageDispatch({type: BookmarkedProviderActions.REMOVE_MOVIE, id: movie.id})
     } catch (err) {
       if (err.message === '404') {
-        removeMovieFromStore();
+        bookmarkedPageDispatch({type: BookmarkedProviderActions.REMOVE_MOVIE, id: movie.id})
       } else {
         toast.error('Oops, something went wrong...');
         console.error(err);

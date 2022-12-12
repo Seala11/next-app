@@ -5,25 +5,28 @@ import Meta from '../components/Meta';
 import BookmarkedList from '../Layouts/MoviesList/BookmarkedList';
 import { IMovie } from '../shared/api/types';
 import { useAppContext } from '../shared/context/appProvider';
+import { BookmarkedProviderActions } from '../shared/context/bookmarkedPageReducer';
 import { Message, Title } from '../shared/styles/sharedstyles';
 
 export default function BookMarked({ bookmarked }: InferGetStaticPropsType<typeof getStaticProps>) {
-  const { bookmarkedRes, setBookmarkedRes } = useAppContext();
+  const { bookmarkedPageState, bookmarkedPageDispatch } = useAppContext();
+  const { bookmarkedMovies } = bookmarkedPageState;
 
   useEffect(() => {
-    if (!bookmarkedRes) {
-      setBookmarkedRes(bookmarked);
+    if (bookmarkedMovies.length === 0) {
+      bookmarkedPageDispatch({type: BookmarkedProviderActions.ADD_MOVIES, movies: bookmarked});
     }
-  }, [bookmarked, bookmarkedRes, setBookmarkedRes]);
+    console.log(bookmarkedMovies, bookmarkedPageState, bookmarked)
+  }, [bookmarked, bookmarkedMovies, bookmarkedPageDispatch, bookmarkedPageState]);
 
   return (
     <>
       <Meta title="Popular TV Shows" />
-      {bookmarkedRes && (
+      {bookmarkedMovies && (
         <>
           <Title>Bookmarked Movies</Title>
-          {bookmarkedRes && bookmarkedRes.length > 0 ? (
-            <BookmarkedList bookmarked={bookmarkedRes} />
+          {bookmarkedMovies && bookmarkedMovies.length > 0 ? (
+            <BookmarkedList bookmarked={bookmarkedMovies} />
           ) : (
             <Message>No bookmarked movies are available</Message>
           )}
