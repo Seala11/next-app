@@ -20,8 +20,6 @@ export default async function handler(req, res) {
       return res.status(404).json({ message: 'Not found' });
     }
 
-    client.close();
-
     res.status(201).json({ message: 'Movie added' });
   }
 }

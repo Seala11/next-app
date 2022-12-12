@@ -3,14 +3,14 @@ import { fetchMovies } from '../../shared/api/themoviedbApi';
 import { IMovie, IMovies } from '../../shared/api/types';
 import { useAppContext } from '../../shared/context/appProvider';
 import { LoadButton } from '../../shared/styles/sharedstyles';
-import MovieItem from './Card';
-import { FlexContainer } from './CardList.styled';
+import MovieCard from '../../components/MovieCard/MovieCard';
+import { FlexContainer } from './moviesList.styled';
 
 type Props = {
   movies: IMovie[];
 };
 
-export default function CardList({ movies }: Props) {
+export default function MoviesList({ movies }: Props) {
   const { moviesRes, setMoviesRes, page, setPage } = useAppContext();
 
   const dataHandler = async () => {
@@ -32,7 +32,7 @@ export default function CardList({ movies }: Props) {
     <>
       <FlexContainer>
         {movies.map((movie) => (
-          <MovieItem key={movie.id} movie={movie} />
+          <MovieCard key={movie.id} movie={movie} />
         ))}
       </FlexContainer>
       <LoadButton onClick={dataHandler}>Load more</LoadButton>

@@ -1,16 +1,6 @@
 import styled from 'styled-components';
 
-const FlexContainer = styled.div`
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 1rem;
-  row-gap: 2rem;
-  max-width: 120rem;
-  padding: 0 0 7rem;
-`;
-
-const Card = styled.div`
+export const Card = styled.div`
   color: inherit;
   text-decoration: none;
   border-radius: 1rem;
@@ -24,7 +14,7 @@ const Card = styled.div`
   :focus,
   :active {
     box-shadow: 0 0 1rem 0.1rem ${({ theme }) => theme.colors.accent};
-    background-color: ${({ theme }) => theme.colors.darkL};;
+    background-color: ${({ theme }) => theme.colors.darkL};
   }
 
   img {
@@ -46,5 +36,3 @@ const Card = styled.div`
     filter: opacity(0.8);
   }
 `;
-
-export { FlexContainer, Card };

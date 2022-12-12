@@ -1,23 +1,23 @@
 import { MongoClient } from 'mongodb';
 import { InferGetStaticPropsType } from 'next';
 import Meta from '../components/Meta';
-import MovieItem from '../Layouts/CardList/Card';
-import { FlexContainer } from '../Layouts/CardList/CardList.styled';
+import MovieItem from '../components/MovieCard/MovieCard';
+import { FlexContainer } from '../Layouts/MoviesList/moviesList.styled';
 import { IMovie } from '../shared/api/types';
 import { Title } from '../shared/styles/sharedstyles';
 
 export default function BookMarked({ bookmarked }: InferGetStaticPropsType<typeof getStaticProps>) {
-  console.log(bookmarked);
-
   return (
     <>
       <Meta title="Popular TV Shows" />
       <Title>Bookmarked Movies</Title>
-      <FlexContainer>
-        {bookmarked.map((movie) => (
-          <MovieItem key={movie.id} movie={movie} />
-        ))}
-      </FlexContainer>
+      {bookmarked && (
+        <FlexContainer>
+          {bookmarked.map((movie) => (
+            <MovieItem key={movie.id} movie={movie} />
+          ))}
+        </FlexContainer>
+      )}
       {!bookmarked && <p>No bookmarked movies are available</p>}
     </>
   );

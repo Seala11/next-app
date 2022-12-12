@@ -1,6 +1,6 @@
 import { Title } from '../shared/styles/sharedstyles';
 import { InferGetStaticPropsType } from 'next';
-import CardList from '../Layouts/CardList/CardList';
+import MoviesList from '../Layouts/MoviesList/MoviesList';
 import { fetchMovies } from '../shared/api/themoviedbApi';
 import { IMovies } from '../shared/api/types';
 import { useEffect } from 'react';
@@ -21,7 +21,7 @@ export default function Movies({ movies }: InferGetStaticPropsType<typeof getSta
       {moviesRes && (
         <>
           <Title>Popular Movies</Title>
-          <CardList movies={moviesRes} />
+          <MoviesList movies={moviesRes} />
         </>
       )}
     </>

@@ -5,13 +5,13 @@ import { toast } from 'react-toastify';
 import { fetchAddMovie } from '../../shared/api/moviesApi';
 import { IMovie } from '../../shared/api/types';
 import { Button } from '../../shared/styles/sharedstyles';
-import { Card } from './CardList.styled';
+import { Card } from './movieCard.styled';
 
 type Props = {
   movie: IMovie;
 };
 
-export default function MovieItem({ movie }: Props) {
+export default function MovieCard({ movie }: Props) {
   const [pending, setPending] = useState(false);
   const date = new Date(movie.release_date).toLocaleString('en-US', {
     month: 'short',
