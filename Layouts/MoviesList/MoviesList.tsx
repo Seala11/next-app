@@ -3,7 +3,7 @@ import { fetchMovies } from '../../shared/api/themoviedbApi';
 import { IMovie, IMovies } from '../../shared/api/types';
 import { useAppContext } from '../../shared/context/appProvider';
 import { LoadButton } from '../../shared/styles/sharedstyles';
-import MovieCard from '../../components/MovieCard/MovieCard';
+import MovieCard, { Page } from '../../components/MovieCard/MovieCard';
 import { FlexContainer } from './moviesList.styled';
 
 type Props = {
@@ -32,7 +32,7 @@ export default function MoviesList({ movies }: Props) {
     <>
       <FlexContainer>
         {movies.map((movie) => (
-          <MovieCard key={movie.id} movie={movie} />
+          <MovieCard key={movie.id} movie={movie} page={Page.MOVIES} />
         ))}
       </FlexContainer>
       <LoadButton onClick={dataHandler}>Load more</LoadButton>

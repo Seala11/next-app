@@ -11,3 +11,15 @@ export const fetchAddMovie = async (movie: IMovie) => {
 
   return response;
 };
+
+export const fetchRemoveMovie = async (id: string) => {
+  const response = await fetch('/api/movies', {
+    method: 'DELETE',
+    body: JSON.stringify(id),
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  });
+
+  return response;
+};

@@ -5,6 +5,7 @@ const AppContext = createContext(null);
 
 export function AppProvider({ children }) {
   const [moviesRes, setMoviesRes] = useState<IMovie[]>();
+  const [bookmarkedRes, setBookmarkedRes] = useState<IMovie[]>();
   const [page, setPage] = useState<number>();
 
   return (
@@ -12,6 +13,8 @@ export function AppProvider({ children }) {
       value={{
         moviesRes,
         setMoviesRes,
+        bookmarkedRes,
+        setBookmarkedRes,
         page,
         setPage,
       }}

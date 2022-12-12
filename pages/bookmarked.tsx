@@ -1,24 +1,34 @@
 import { MongoClient } from 'mongodb';
 import { InferGetStaticPropsType } from 'next';
+import { useEffect, useState } from 'react';
 import Meta from '../components/Meta';
-import MovieItem from '../components/MovieCard/MovieCard';
-import { FlexContainer } from '../Layouts/MoviesList/moviesList.styled';
+import BookmarkedList from '../Layouts/MoviesList/BookmarkedList';
 import { IMovie } from '../shared/api/types';
+import { useAppContext } from '../shared/context/appProvider';
 import { Title } from '../shared/styles/sharedstyles';
 
 export default function BookMarked({ bookmarked }: InferGetStaticPropsType<typeof getStaticProps>) {
+  const { bookmarkedRes, setBookmarkedRes } = useAppContext();
+
+  useEffect(() => {
+    if (!bookmarkedRes) {
+      setBookmarkedRes(bookmarked);
+    }
+  }, [bookmarked, bookmarkedRes, setBookmarkedRes]);
+
   return (
     <>
       <Meta title="Popular TV Shows" />
-      <Title>Bookmarked Movies</Title>
-      {bookmarked && (
-        <FlexContainer>
-          {bookmarked.map((movie) => (
-            <MovieItem key={movie.id} movie={movie} />
-          ))}
-        </FlexContainer>
+      {bookmarkedRes && (
+        <>
+          <Title>Bookmarked Movies</Title>
+          {bookmarkedRes ? (
+            <BookmarkedList bookmarked={bookmarkedRes} />
+          ) : (
+            <p>No bookmarked movies are available</p>
+          )}
+        </>
       )}
-      {!bookmarked && <p>No bookmarked movies are available</p>}
     </>
   );
 }
@@ -53,6 +63,5 @@ export const getStaticProps = async () => {
     props: {
       bookmarked,
     },
-    revalidate: 1,
   };
 };
