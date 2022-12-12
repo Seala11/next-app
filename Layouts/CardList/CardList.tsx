@@ -1,5 +1,5 @@
 import React from 'react';
-import { fetchMovies } from '../../shared/api/movieApi';
+import { fetchMovies } from '../../shared/api/themoviedbApi';
 import { IMovie, IMovies } from '../../shared/api/types';
 import { useAppContext } from '../../shared/context/appProvider';
 import { LoadButton } from '../../shared/styles/sharedstyles';

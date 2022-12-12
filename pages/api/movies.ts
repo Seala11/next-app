@@ -9,9 +9,15 @@ export default async function handler(req, res) {
 
     const moviesCollection = db.collection('movies');
 
+    const movieExist = await moviesCollection.findOne({ id: req.body.id });
+
+    if (movieExist) {
+      return res.status(409).json({ res: movieExist, message: 'Movie already added' });
+    }
+
     const result = await moviesCollection.insertOne(data);
     if (!result) {
-      res.status(404).json({ message: 'Not found' });
+      return res.status(404).json({ message: 'Not found' });
     }
 
     client.close();

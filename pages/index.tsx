@@ -1,7 +1,7 @@
 import { Title } from '../shared/styles/sharedstyles';
 import { InferGetStaticPropsType } from 'next';
 import CardList from '../Layouts/CardList/CardList';
-import { fetchMovies } from '../shared/api/movieApi';
+import { fetchMovies } from '../shared/api/themoviedbApi';
 import { IMovies } from '../shared/api/types';
 import { useEffect } from 'react';
 import { useAppContext } from '../shared/context/appProvider';

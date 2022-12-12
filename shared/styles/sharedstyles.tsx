@@ -25,6 +25,15 @@ const Button = styled.button`
   &:hover {
     background-color: ${({ theme }) => theme.colors.accent};
   }
+
+  &:disabled {
+    cursor: auto;
+    color: ${({ theme }) => theme.colors.accent};
+
+    &:hover {
+      background-color: transparent;
+    }
+  }
 `;
 
 const LoadButton = styled(Button)`

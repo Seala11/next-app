@@ -2,7 +2,7 @@ import { InferGetStaticPropsType } from 'next';
 import React from 'react';
 import Meta from '../../../components/Meta';
 import Movie from '../../../Layouts/Movie/Movie';
-import { fetchMovieById, fetchMovies } from '../../../shared/api/movieApi';
+import { fetchMovieById, fetchMovies } from '../../../shared/api/themoviedbApi';
 import { IMovieDetails, IMovies } from '../../../shared/api/types';
 
 const MoviePage = ({ movie }: InferGetStaticPropsType<typeof getStaticProps>) => {

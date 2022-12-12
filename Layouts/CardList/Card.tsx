@@ -1,7 +1,10 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import React from 'react';
+import React, { useState } from 'react';
+import { toast } from 'react-toastify';
+import { fetchAddMovie } from '../../shared/api/moviesApi';
 import { IMovie } from '../../shared/api/types';
+import { Button } from '../../shared/styles/sharedstyles';
 import { Card } from './CardList.styled';
 
 type Props = {
@@ -9,6 +12,7 @@ type Props = {
 };
 
 export default function MovieItem({ movie }: Props) {
+  const [pending, setPending] = useState(false);
   const date = new Date(movie.release_date).toLocaleString('en-US', {
     month: 'short',
     day: 'numeric',
@@ -19,19 +23,28 @@ export default function MovieItem({ movie }: Props) {
     e.preventDefault();
     e.stopPropagation();
 
+    setPending(true);
+    toast.dismiss();
     try {
-      const response = await fetch('/api/movies', {
-        method: 'POST',
-        body: JSON.stringify(movie),
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      });
+      const response = await fetchAddMovie(movie);
 
-      const data = await response.json();
-      console.log(response, data);
+      if (!response.ok) {
+        const err = await response.json();
+        console.log(err);
+        throw new Error(`${response.status}`);
+      }
+
+      await response.json();
+      toast.info('Movie added to bookmarked');
     } catch (err) {
-      console.error(err);
+      if (err.message === '409') {
+        toast.info('Movie already bookmarked');
+      } else {
+        toast.error('Oops, something went wrong...');
+        console.error(err);
+      }
+    } finally {
+      setPending(false);
     }
   };
 
@@ -47,7 +60,9 @@ export default function MovieItem({ movie }: Props) {
         <h2>{movie.title}</h2>
         <p>{date}</p>
       </Card>
-      <button onClick={movieHandler}>Add movie</button>
+      <Button onClick={movieHandler} disabled={pending}>
+        Add movie
+      </Button>
     </Link>
   );
 }

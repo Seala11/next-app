@@ -1,6 +1,8 @@
 import React, { ReactElement } from 'react';
 import Meta from '../../components/Meta';
 import Navbar from '../../components/Navbar/Navbar';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { Container, Main } from './MainLayout.styled';
 
 type Props = {
@@ -12,6 +14,18 @@ const MainLayout = ({ children }: Props) => {
     <>
       <Meta />
       <Navbar />
+      <ToastContainer
+        position="bottom-right"
+        autoClose={2500}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="colored"
+      />
       <Container>
         <Main>{children}</Main>
       </Container>
