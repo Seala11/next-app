@@ -41,4 +41,8 @@ const LoadButton = styled(Button)`
   width: 100%;
 `;
 
-export { Title, Button, LoadButton };
+const Message = styled.p`
+  text-align: center;
+`
+
+export { Title, Button, LoadButton, Message };

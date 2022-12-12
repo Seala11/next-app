@@ -8,8 +8,7 @@ import { useAppContext } from '../../shared/context/appProvider';
 import { Card, MarkButton } from './movieCard.styled';
 import { MdOutlineBookmarkAdd } from 'react-icons/md';
 import { MdOutlineBookmarkRemove } from 'react-icons/md';
-
-
+import { motion } from 'framer-motion';
 
 export enum Page {
   MOVIES = 'movies',
@@ -45,6 +44,7 @@ export default function MovieCard({ movie, page }: Props) {
 
       await response.json();
       toast.info(`${movie.title} added to bookmarked`);
+      setBookmarkedRes((prevRes) => [...prevRes, movie]);
     } catch (err) {
       if (err.message === '409') {
         toast.info(`${movie.title} already bookmarked`);
@@ -72,17 +72,13 @@ export default function MovieCard({ movie, page }: Props) {
 
       if (!response.ok) {
         const err = await response.json();
-        console.log(err);
         throw new Error(`${response.status}`);
       }
 
-      console.log(response);
       await response.json();
-      toast.info(`${movie.title} removed from bookmarked`);
       removeMovieFromStore();
     } catch (err) {
       if (err.message === '404') {
-        toast.error(`${movie.title} removed from bookmarked`);
         removeMovieFromStore();
       } else {
         toast.error('Oops, something went wrong...');
@@ -95,7 +91,14 @@ export default function MovieCard({ movie, page }: Props) {
 
   return (
     <Link href="/movie/[id]" as={`/movie/${movie.id}`}>
-      <Card key={movie.id}>
+      <Card
+        key={movie.id}
+        as={motion.div}
+        initial={{ opacity: 0 }}
+        exit={{ opacity: 0 }}
+        animate={{ opacity: 1, transition: { delay: 0.5, type: 'spring' } }}
+        layout
+      >
         <Image
           src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
           alt={`${movie.title} poster`}
@@ -104,17 +107,17 @@ export default function MovieCard({ movie, page }: Props) {
         />
         <h2>{movie.title}</h2>
         <p>{date}</p>
-      {page === Page.MOVIES && (
-        <MarkButton onClick={addMovieHandler} disabled={pending}>
-          <MdOutlineBookmarkAdd />
-        </MarkButton>
-      )}
+        {page === Page.MOVIES && (
+          <MarkButton onClick={addMovieHandler} disabled={pending}>
+            <MdOutlineBookmarkAdd />
+          </MarkButton>
+        )}
 
-      {page === Page.BOOKMARKED && (
-        <MarkButton onClick={removeMovieHandler} disabled={pending}>
-          <MdOutlineBookmarkRemove />
-        </MarkButton>
-      )}
+        {page === Page.BOOKMARKED && (
+          <MarkButton onClick={removeMovieHandler} disabled={pending}>
+            <MdOutlineBookmarkRemove />
+          </MarkButton>
+        )}
       </Card>
     </Link>
   );

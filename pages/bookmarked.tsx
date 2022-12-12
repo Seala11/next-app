@@ -5,7 +5,7 @@ import Meta from '../components/Meta';
 import BookmarkedList from '../Layouts/MoviesList/BookmarkedList';
 import { IMovie } from '../shared/api/types';
 import { useAppContext } from '../shared/context/appProvider';
-import { Title } from '../shared/styles/sharedstyles';
+import { Message, Title } from '../shared/styles/sharedstyles';
 
 export default function BookMarked({ bookmarked }: InferGetStaticPropsType<typeof getStaticProps>) {
   const { bookmarkedRes, setBookmarkedRes } = useAppContext();
@@ -22,10 +22,10 @@ export default function BookMarked({ bookmarked }: InferGetStaticPropsType<typeo
       {bookmarkedRes && (
         <>
           <Title>Bookmarked Movies</Title>
-          {bookmarkedRes ? (
+          {bookmarkedRes && bookmarkedRes.length > 0 ? (
             <BookmarkedList bookmarked={bookmarkedRes} />
           ) : (
-            <p>No bookmarked movies are available</p>
+            <Message>No bookmarked movies are available</Message>
           )}
         </>
       )}

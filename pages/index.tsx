@@ -18,7 +18,7 @@ export default function Movies({ movies }: InferGetStaticPropsType<typeof getSta
 
   return (
     <>
-      {moviesRes && (
+      {moviesRes && moviesRes.length > 0 && (
         <>
           <Title>Popular Movies</Title>
           <MoviesList movies={moviesRes} />
