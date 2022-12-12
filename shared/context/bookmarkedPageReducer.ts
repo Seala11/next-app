@@ -8,10 +8,12 @@ export enum BookmarkedProviderActions {
 
 export type BookmarkedState = {
   bookmarkedMovies: IMovie[];
+  pending: boolean;
 };
 
 export const initialBookmarkedState = {
   bookmarkedMovies: [],
+  pending: true,
 };
 
 export type BookmarkedAction =
@@ -27,6 +29,7 @@ export const bookmarkPageReducer = (
     case BookmarkedProviderActions.ADD_MOVIES:
       return {
         ...state,
+        pending: false,
         bookmarkedMovies: action.movies,
       };
 

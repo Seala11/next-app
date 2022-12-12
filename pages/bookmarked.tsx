@@ -1,6 +1,6 @@
 import { MongoClient } from 'mongodb';
 import { InferGetStaticPropsType } from 'next';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import Meta from '../components/Meta';
 import BookmarkedList from '../Layouts/MoviesList/BookmarkedList';
 import { IMovie } from '../shared/api/types';
@@ -10,14 +10,16 @@ import { Message, Title } from '../shared/styles/sharedstyles';
 
 export default function BookMarked({ bookmarked }: InferGetStaticPropsType<typeof getStaticProps>) {
   const { bookmarkedPageState, bookmarkedPageDispatch } = useAppContext();
-  const { bookmarkedMovies } = bookmarkedPageState;
+  const { bookmarkedMovies, pending } = bookmarkedPageState;
 
   useEffect(() => {
-    if (bookmarkedMovies.length === 0) {
+    if (bookmarkedMovies.length === 0 && pending) {
       bookmarkedPageDispatch({type: BookmarkedProviderActions.ADD_MOVIES, movies: bookmarked});
+    } else if (bookmarkedMovies.length > 0 && pending) {
+      bookmarkedPageDispatch({type: BookmarkedProviderActions.ADD_MOVIES, movies: []});
     }
     console.log(bookmarkedMovies, bookmarkedPageState, bookmarked)
-  }, [bookmarked, bookmarkedMovies, bookmarkedPageDispatch, bookmarkedPageState]);
+  }, [bookmarked, bookmarkedMovies, bookmarkedPageDispatch, bookmarkedPageState, pending]);
 
   return (
     <>
