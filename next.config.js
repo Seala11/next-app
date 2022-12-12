@@ -2,6 +2,9 @@
 
 const nextConfig = {
   reactStrictMode: true,
+  env: {
+    TOKEN: process.env.TOKEN,
+  },
   compiler: {
     styledComponents: true,
   },
