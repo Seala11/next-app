@@ -16,9 +16,9 @@ const MainLayout = ({ children }: Props) => {
       <Navbar />
       <ToastContainer
         position="bottom-right"
-        autoClose={2500}
-        hideProgressBar={false}
-        newestOnTop={false}
+        autoClose={3500}
+        hideProgressBar={true}
+        newestOnTop={true}
         closeOnClick
         rtl={false}
         pauseOnFocusLoss

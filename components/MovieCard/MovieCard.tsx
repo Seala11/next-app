@@ -5,8 +5,11 @@ import { toast } from 'react-toastify';
 import { fetchAddMovie, fetchRemoveMovie } from '../../shared/api/moviesApi';
 import { IMovie } from '../../shared/api/types';
 import { useAppContext } from '../../shared/context/appProvider';
-import { Button } from '../../shared/styles/sharedstyles';
-import { Card } from './movieCard.styled';
+import { Card, MarkButton } from './movieCard.styled';
+import { MdOutlineBookmarkAdd } from 'react-icons/md';
+import { MdOutlineBookmarkRemove } from 'react-icons/md';
+
+
 
 export enum Page {
   MOVIES = 'movies',
@@ -32,7 +35,6 @@ export default function MovieCard({ movie, page }: Props) {
     e.stopPropagation();
 
     setPending(true);
-    toast.dismiss();
     try {
       const response = await fetchAddMovie(movie);
 
@@ -42,10 +44,10 @@ export default function MovieCard({ movie, page }: Props) {
       }
 
       await response.json();
-      toast.info('Movie added to bookmarked');
+      toast.info(`${movie.title} added to bookmarked`);
     } catch (err) {
       if (err.message === '409') {
-        toast.info('Movie already bookmarked');
+        toast.info(`${movie.title} already bookmarked`);
       } else {
         toast.error('Oops, something went wrong...');
         console.error(err);
@@ -58,14 +60,13 @@ export default function MovieCard({ movie, page }: Props) {
   const removeMovieFromStore = () => {
     const updatedList = bookmarkedRes.filter((storedMovie) => storedMovie.id !== movie.id);
     setBookmarkedRes(updatedList);
-  }
+  };
 
   const removeMovieHandler = async (e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
 
     setPending(true);
-    toast.dismiss();
     try {
       const response = await fetchRemoveMovie(`${movie.id}`);
 
@@ -76,12 +77,12 @@ export default function MovieCard({ movie, page }: Props) {
       }
 
       console.log(response);
-      const result = await response.json();
-      toast.info('Movie removed from bookmarked');
+      await response.json();
+      toast.info(`${movie.title} removed from bookmarked`);
       removeMovieFromStore();
     } catch (err) {
       if (err.message === '404') {
-        toast.error('Movie not found');
+        toast.error(`${movie.title} removed from bookmarked`);
         removeMovieFromStore();
       } else {
         toast.error('Oops, something went wrong...');
@@ -103,18 +104,18 @@ export default function MovieCard({ movie, page }: Props) {
         />
         <h2>{movie.title}</h2>
         <p>{date}</p>
-      </Card>
       {page === Page.MOVIES && (
-        <Button onClick={addMovieHandler} disabled={pending}>
-          Add movie
-        </Button>
+        <MarkButton onClick={addMovieHandler} disabled={pending}>
+          <MdOutlineBookmarkAdd />
+        </MarkButton>
       )}
 
       {page === Page.BOOKMARKED && (
-        <Button onClick={removeMovieHandler} disabled={pending}>
-          Remove
-        </Button>
+        <MarkButton onClick={removeMovieHandler} disabled={pending}>
+          <MdOutlineBookmarkRemove />
+        </MarkButton>
       )}
+      </Card>
     </Link>
   );
 }
