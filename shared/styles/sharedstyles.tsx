@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { device } from './media';
 
 const Title = styled.h1`
   margin: 0;
@@ -6,6 +7,10 @@ const Title = styled.h1`
   align-self: flex-start;
   padding: 3rem 0;
   font-weight: 400;
+
+  @media ${device.mobile} {
+    align-self: center;
+  }
 `;
 
 const Button = styled.button`
@@ -43,6 +48,6 @@ const LoadButton = styled(Button)`
 
 const Message = styled.p`
   text-align: center;
-`
+`;
 
 export { Title, Button, LoadButton, Message };

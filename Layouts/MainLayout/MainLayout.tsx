@@ -13,7 +13,6 @@ type Props = {
 
 const MainLayout = ({ children }: Props) => {
   const router = useRouter();
-  console.log(router.route);
   return (
     <>
       <Meta />
@@ -36,9 +35,11 @@ const MainLayout = ({ children }: Props) => {
           as={motion.div}
           initial="initialState"
           animate="animateState"
+          exit="exit"
           variants={{
             initialState: { opacity: 0 },
             animateState: { opacity: 1 },
+            exit: { opacity: 0 },
           }}
         >
           <Main>{children}</Main>

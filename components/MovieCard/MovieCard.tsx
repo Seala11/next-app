@@ -86,7 +86,7 @@ export default function MovieCard({ movie, page }: Props) {
   };
 
   return (
-    <Link href="/movie/[id]" as={`/movie/${movie.id}`}>
+    <Link href="/movie/[id]" as={`/movie/${movie.id}`} scroll={false}>
       <Card
         key={movie.id}
         as={motion.div}

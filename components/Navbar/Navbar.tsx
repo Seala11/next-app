@@ -2,17 +2,17 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React from 'react';
 import { MdMovie } from 'react-icons/md';
-import { Container, List, ListItem, Logo } from './Navbar.styled';
+import { Container, FlexContainer, List, ListItem, Logo } from './Navbar.styled';
 
 const Navbar = () => {
   const router = useRouter();
 
   return (
     <Container>
-      <div>
+      <FlexContainer>
         <Logo>
           <MdMovie fill="#e74c3c" />
-          Movie App
+          <h1>Movie App</h1>
         </Logo>
         <List>
           <ListItem active={router.route === '/'}>
@@ -22,7 +22,7 @@ const Navbar = () => {
             <Link href="/bookmarked">Bookmarked</Link>
           </ListItem>
         </List>
-      </div>
+      </FlexContainer>
     </Container>
   );
 };

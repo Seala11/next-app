@@ -14,6 +14,7 @@ import {
   SubTitleInfo,
 } from './Movie.styled';
 import { useRouter } from 'next/router';
+import { motion } from 'framer-motion';
 
 type Props = {
   movie: IMovieDetails;
@@ -38,10 +39,22 @@ const Movie = ({ movie }: Props) => {
   let languageNames = new Intl.DisplayNames(['en'], { type: 'language' });
 
   return (
-    <Container src={`https://image.tmdb.org/t/p/original${movie.backdrop_path}`}>
+    <Container
+      key={router.route}
+      src={`https://image.tmdb.org/t/p/original${movie.backdrop_path}`}
+      as={motion.div}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ delay: 1 }}
+    >
       <FlexContainer>
         <Button onClick={() => router.back()}>Go Back</Button>
-        <ImageContainer>
+        <ImageContainer
+          as={motion.div}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+        >
           <Image
             src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
             alt={`${movie.title} poster`}

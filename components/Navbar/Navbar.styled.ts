@@ -1,26 +1,38 @@
 import styled from 'styled-components';
+import { device } from '../../shared/styles/media';
 
 const Container = styled.div`
   padding: 2.5rem 3rem;
   background-color: ${({ theme }) => theme.colors.darkL};
 
-  div {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    max-width: 120rem;
-    width: 100%;
-    margin: 0 auto;
+  @media ${device.mobile} {
+    padding: 2rem 1.5rem;
   }
 `;
 
-const Logo = styled.h1`
-  font-size: 2rem;
-  font-weight: 400;
+const FlexContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 120rem;
+  width: 100%;
+  margin: 0 auto;
+`;
+
+const Logo = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 1rem;
+
+  h1 {
+    font-size: 2rem;
+    font-weight: 400;
+
+    @media ${device.mobile} {
+      display: none;
+    }
+  }
 
   svg {
     font-size: 3rem;
@@ -52,4 +64,4 @@ const ListItem = styled.li<LinkProps>`
   }
 `;
 
-export { Container, List, ListItem, Logo };
+export { Container, List, ListItem, Logo, FlexContainer };
