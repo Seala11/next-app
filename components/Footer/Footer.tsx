@@ -9,13 +9,17 @@ const Footer = () => {
       <FlexContainer>
         <List>
           <ListItem active={false}>
-            <Link href="https://github.com/Seala11">
+            <Link href="https://github.com/Seala11" legacyBehavior>
+              <a target="_blank">
               <BsGithub />
+              </a>
             </Link>
           </ListItem>
           <ListItem active={false}>
-            <Link href="https://www.linkedin.com/in/hanna-papova-56a0776b/">
-              <BsLinkedin />
+            <Link href="https://www.linkedin.com/in/hanna-papova-56a0776b/" legacyBehavior>
+              <a target="_blank">
+                <BsLinkedin />
+              </a>
             </Link>
           </ListItem>
         </List>

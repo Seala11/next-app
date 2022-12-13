@@ -4,8 +4,6 @@ import Navbar from '../../components/Navbar/Navbar';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { Container, FlexContainer, Main } from './MainLayout.styled';
-import { motion, AnimatePresence } from 'framer-motion';
-import { useRouter } from 'next/router';
 import Footer from '../../components/Footer/Footer';
 
 type Props = {
@@ -13,7 +11,6 @@ type Props = {
 };
 
 const MainLayout = ({ children }: Props) => {
-  const router = useRouter();
   return (
     <>
       <Meta />
@@ -31,22 +28,9 @@ const MainLayout = ({ children }: Props) => {
       />
       <FlexContainer>
         <Navbar />
-        <AnimatePresence>
-          <Container
-            key={router.route}
-            as={motion.div}
-            initial="initialState"
-            animate="animateState"
-            exit="exit"
-            variants={{
-              initialState: { opacity: 0 },
-              animateState: { opacity: 1 },
-              exit: { opacity: 0 },
-            }}
-          >
+          <Container>
             <Main>{children}</Main>
           </Container>
-        </AnimatePresence>
         <Footer />
       </FlexContainer>
     </>
