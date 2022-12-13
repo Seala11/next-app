@@ -29,12 +29,18 @@ export default function Movies({ movies }: InferGetStaticPropsType<typeof getSta
 }
 
 export const getStaticProps = async () => {
-  const res = await fetchMovies();
-  const movies: IMovies = await res.json();
+  try {
+    const res = await fetchMovies();
+    const movies: IMovies = await res.json();
 
-  return {
-    props: {
-      movies,
-    },
-  };
+    return {
+      props: {
+        movies,
+      },
+    };
+  } catch (err) {
+    return {
+      notFound: true,
+    };
+  }
 };

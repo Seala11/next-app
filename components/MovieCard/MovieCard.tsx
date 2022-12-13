@@ -24,7 +24,6 @@ type Props = {
 export default function MovieCard({ movie, page }: Props) {
   const [pending, setPending] = useState(false);
   const { bookmarkedPageState, bookmarkedPageDispatch } = useAppContext();
-  const { bookmarkedMovies } = bookmarkedPageState;
 
   const date = new Date(movie.release_date).toLocaleString('en-US', {
     month: 'short',
@@ -47,7 +46,7 @@ export default function MovieCard({ movie, page }: Props) {
 
       await response.json();
       toast.info(`${movie.title} added to bookmarked`);
-      bookmarkedPageDispatch({type: BookmarkedProviderActions.ADD_MOVIE, movie: movie})
+      bookmarkedPageDispatch({ type: BookmarkedProviderActions.ADD_MOVIE, movie: movie });
     } catch (err) {
       if (err.message === '409') {
         toast.info(`${movie.title} already bookmarked`);
@@ -74,10 +73,10 @@ export default function MovieCard({ movie, page }: Props) {
       }
 
       await response.json();
-      bookmarkedPageDispatch({type: BookmarkedProviderActions.REMOVE_MOVIE, id: movie.id})
+      bookmarkedPageDispatch({ type: BookmarkedProviderActions.REMOVE_MOVIE, id: movie.id });
     } catch (err) {
       if (err.message === '404') {
-        bookmarkedPageDispatch({type: BookmarkedProviderActions.REMOVE_MOVIE, id: movie.id})
+        bookmarkedPageDispatch({ type: BookmarkedProviderActions.REMOVE_MOVIE, id: movie.id });
       } else {
         toast.error('Oops, something went wrong...');
         console.error(err);
@@ -95,7 +94,9 @@ export default function MovieCard({ movie, page }: Props) {
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         exit={{ opacity: 0 }}
-        // animate={{ opacity: 1, transition: { delay: 0.5, type: 'spring' } }}
+        viewport={{ once: true }}
+        transition={{ delay: 0.1, type: 'spring', stiffness: 60 }}
+        whileHover={{ scale: 1.06, transition: { ease: 'easeOut' } }}
         layout
       >
         <Image

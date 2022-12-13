@@ -14,16 +14,16 @@ export default function BookMarked({ bookmarked }: InferGetStaticPropsType<typeo
 
   useEffect(() => {
     if (bookmarkedMovies.length === 0 && pending) {
-      bookmarkedPageDispatch({type: BookmarkedProviderActions.ADD_MOVIES, movies: bookmarked});
+      bookmarkedPageDispatch({ type: BookmarkedProviderActions.ADD_MOVIES, movies: bookmarked });
     } else if (bookmarkedMovies.length > 0 && pending) {
-      bookmarkedPageDispatch({type: BookmarkedProviderActions.ADD_MOVIES, movies: []});
+      bookmarkedPageDispatch({ type: BookmarkedProviderActions.ADD_MOVIES, movies: [] });
     }
-    console.log(bookmarkedMovies, bookmarkedPageState, bookmarked)
+    console.log(bookmarkedMovies, bookmarkedPageState, bookmarked);
   }, [bookmarked, bookmarkedMovies, bookmarkedPageDispatch, bookmarkedPageState, pending]);
 
   return (
     <>
-      <Meta title="Popular TV Shows" />
+      <Meta title="Bookmarked Movies" />
       {bookmarkedMovies && (
         <>
           <Title>Bookmarked Movies</Title>
@@ -39,34 +39,40 @@ export default function BookMarked({ bookmarked }: InferGetStaticPropsType<typeo
 }
 
 export const getStaticProps = async () => {
-  const client = await MongoClient.connect(process.env.MONGODB_URI);
+  try {
+    const client = await MongoClient.connect(process.env.MONGODB_URI);
 
-  const db = client.db();
-  const moviesCollection = db.collection('movies');
-  const movies = await moviesCollection.find().toArray();
+    const db = client.db();
+    const moviesCollection = db.collection('movies');
+    const movies = await moviesCollection.find().toArray();
 
-  const bookmarked: IMovie[] = movies.map((movie) => ({
-    poster_path: movie.poster_path,
-    adult: movie.adult,
-    overview: movie.overview,
-    release_date: movie.release_date,
-    genre_ids: movie.genre_ids,
-    id: movie.id,
-    original_title: movie.original_title,
-    original_language: movie.original_language,
-    title: movie.title,
-    backdrop_path: movie.backdrop_path,
-    popularity: movie.popularity,
-    vote_count: movie.vote_count,
-    video: movie.video,
-    vote_average: movie.vote_average,
-  }));
+    const bookmarked: IMovie[] = movies.map((movie) => ({
+      poster_path: movie.poster_path,
+      adult: movie.adult,
+      overview: movie.overview,
+      release_date: movie.release_date,
+      genre_ids: movie.genre_ids,
+      id: movie.id,
+      original_title: movie.original_title,
+      original_language: movie.original_language,
+      title: movie.title,
+      backdrop_path: movie.backdrop_path,
+      popularity: movie.popularity,
+      vote_count: movie.vote_count,
+      video: movie.video,
+      vote_average: movie.vote_average,
+    }));
 
-  client.close();
+    client.close();
 
-  return {
-    props: {
-      bookmarked,
-    },
-  };
+    return {
+      props: {
+        bookmarked,
+      },
+    };
+  } catch (err) {
+    return {
+      notFound: true,
+    };
+  }
 };

@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { device } from '../../shared/styles/media';
 
 type Props = {
   src: string;
@@ -34,6 +35,25 @@ const ImageContainer = styled.div`
   justify-content: space-between;
   width: 100%;
   gap: 3rem;
+
+  @media ${device.tablet} {
+    flex-direction: column;
+  }
+
+  img {
+    @media ${device.tablet} {
+      color: transparent;
+      height: 30rem;
+      width: auto;
+      align-self: flex-start;
+    }
+
+    @media ${device.mobile} {
+      height: auto;
+      width: 80vw;
+      margin: 0 auto;
+    }
+  }
 `;
 
 const Button = styled.button`
@@ -85,12 +105,12 @@ const TitleWrapper = styled.div`
   font-size: 1.4rem;
 `;
 
-const Tagline =styled.p`
+const Tagline = styled.p`
   font-size: 1.6rem;
   font-style: italic;
   color: ${({ theme }) => theme.colors.light};
   filter: opacity(0.8);
-`
+`;
 
 const SubTitle = styled.h2`
   margin: 0;
@@ -102,7 +122,7 @@ const SubTitle = styled.h2`
     font-weight: 300;
     font-size: 1.6rem;
   }
-`
+`;
 
 const SubTitleInfo = styled.p`
   margin: 0;
@@ -114,6 +134,17 @@ const SubTitleInfo = styled.p`
     font-weight: 300;
     font-size: 1.6rem;
   }
-`
+`;
 
-export { Container, FlexContainer, Button, Title, InfoContainer, ImageContainer, TitleWrapper, Tagline, SubTitle, SubTitleInfo };
+export {
+  Container,
+  FlexContainer,
+  Button,
+  Title,
+  InfoContainer,
+  ImageContainer,
+  TitleWrapper,
+  Tagline,
+  SubTitle,
+  SubTitleInfo,
+};

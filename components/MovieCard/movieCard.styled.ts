@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { device } from '../../shared/styles/media';
 
 export const Card = styled.div`
   color: inherit;
@@ -10,16 +11,29 @@ export const Card = styled.div`
   min-height: 40rem;
   overflow: hidden;
   position: relative;
+  margin: 0 auto;
 
-  &:hover,
-  :focus,
-  :active {
-    box-shadow: 0 0 1rem 0.1rem ${({ theme }) => theme.colors.accent};
-    background-color: ${({ theme }) => theme.colors.darkL};
+  @media  ${device.tablet}  {
+    width: 16rem;
+    min-height: 30rem;
+  }
+
+  @media  ${device.mobile}  {
+    width: 14rem;
   }
 
   img {
     border-radius: 1rem;
+
+    @media  ${device.tablet}  {
+      width: 16rem;
+      height: auto;
+    }
+
+    @media ${device.mobile} {
+      width: 14rem;
+      height: auto;
+    }
   }
 
   h2 {
@@ -52,6 +66,16 @@ export const MarkButton = styled.button`
   align-items: center;
   transition: all 0.15s ease-in-out;
 
+  @media  ${device.tablet}  {
+    top: 1rem;
+    right: 1rem;
+  }
+
+  @media ${device.mobile} {
+    top: 0.5rem;
+    right: 0.5rem;
+  }
+
   svg {
     fill: ${({ theme }) => theme.colors.light};
     height: 2.4rem;
@@ -65,10 +89,8 @@ export const MarkButton = styled.button`
 
   &:disabled {
     &:hover {
-    /* background-color: #2457bfab; */
-    background-color: ${({ theme }) => theme.colors.accent};
-    cursor: pointer;
-  }
-
+      background-color: ${({ theme }) => theme.colors.accent};
+      cursor: pointer;
+    }
   }
 `;
