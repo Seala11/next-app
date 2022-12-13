@@ -5,6 +5,13 @@ const Container = styled.div`
   flex-flow: column nowrap;
   justify-content: flex-start;
   align-items: center;
+  flex: 1;
+`;
+
+const FlexContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 `;
 
 const Main = styled.main`
@@ -15,4 +22,4 @@ const Main = styled.main`
   align-items: center;
 `;
 
-export { Container, Main };
+export { Container, Main, FlexContainer };

@@ -47,7 +47,8 @@ const LoadButton = styled(Button)`
 `;
 
 const Message = styled.p`
-  text-align: center;
+  text-align: initial;
+  min-width: 120rem;
 `;
 
 export { Title, Button, LoadButton, Message };

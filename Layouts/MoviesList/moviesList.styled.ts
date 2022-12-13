@@ -8,6 +8,7 @@ const FlexContainer = styled.div`
   max-width: 120rem;
   padding: 0 0 7rem;
   width: 90vw;
+  flex: 1;
 
   @media ${device.tablet} {
     grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));

@@ -3,9 +3,10 @@ import Meta from '../../components/Meta';
 import Navbar from '../../components/Navbar/Navbar';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { Container, Main } from './MainLayout.styled';
+import { Container, FlexContainer, Main } from './MainLayout.styled';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useRouter } from 'next/router';
+import Footer from '../../components/Footer/Footer';
 
 type Props = {
   children: ReactElement;
@@ -16,7 +17,6 @@ const MainLayout = ({ children }: Props) => {
   return (
     <>
       <Meta />
-      <Navbar />
       <ToastContainer
         position="bottom-right"
         autoClose={3500}
@@ -29,22 +29,26 @@ const MainLayout = ({ children }: Props) => {
         pauseOnHover
         theme="colored"
       />
-      <AnimatePresence>
-        <Container
-          key={router.route}
-          as={motion.div}
-          initial="initialState"
-          animate="animateState"
-          exit="exit"
-          variants={{
-            initialState: { opacity: 0 },
-            animateState: { opacity: 1 },
-            exit: { opacity: 0 },
-          }}
-        >
-          <Main>{children}</Main>
-        </Container>
-      </AnimatePresence>
+      <FlexContainer>
+        <Navbar />
+        <AnimatePresence>
+          <Container
+            key={router.route}
+            as={motion.div}
+            initial="initialState"
+            animate="animateState"
+            exit="exit"
+            variants={{
+              initialState: { opacity: 0 },
+              animateState: { opacity: 1 },
+              exit: { opacity: 0 },
+            }}
+          >
+            <Main>{children}</Main>
+          </Container>
+        </AnimatePresence>
+        <Footer />
+      </FlexContainer>
     </>
   );
 };
