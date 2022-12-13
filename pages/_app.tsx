@@ -12,6 +12,7 @@ const theme: DefaultTheme = {
     dark: '#10141f',
     darkL: '#161d2f',
     accent: '#586b91',
+    accentL: '#798cb1',
     light: '#f5f5f5',
   },
 };

@@ -1,15 +1,19 @@
 import React, { ReactElement } from 'react';
 import Meta from '../../components/Meta';
 import Navbar from '../../components/Navbar/Navbar';
-import { ToastContainer, toast } from 'react-toastify';
+import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { Container, Main } from './MainLayout.styled';
+import { motion, AnimatePresence } from 'framer-motion';
+import { useRouter } from 'next/router';
 
 type Props = {
   children: ReactElement;
 };
 
 const MainLayout = ({ children }: Props) => {
+  const router = useRouter();
+  console.log(router.route);
   return (
     <>
       <Meta />
@@ -26,9 +30,20 @@ const MainLayout = ({ children }: Props) => {
         pauseOnHover
         theme="colored"
       />
-      <Container>
-        <Main>{children}</Main>
-      </Container>
+      <AnimatePresence>
+        <Container
+          key={router.route}
+          as={motion.div}
+          initial="initialState"
+          animate="animateState"
+          variants={{
+            initialState: { opacity: 0 },
+            animateState: { opacity: 1 },
+          }}
+        >
+          <Main>{children}</Main>
+        </Container>
+      </AnimatePresence>
     </>
   );
 };

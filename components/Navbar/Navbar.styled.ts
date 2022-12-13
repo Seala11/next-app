@@ -3,10 +3,32 @@ import styled from 'styled-components';
 const Container = styled.div`
   padding: 2.5rem 3rem;
   background-color: ${({ theme }) => theme.colors.darkL};
+
+  div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 120rem;
+    width: 100%;
+    margin: 0 auto;
+  }
+`;
+
+const Logo = styled.h1`
+  font-size: 2rem;
+  font-weight: 400;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+
+  svg {
+    font-size: 3rem;
+  }
 `;
 
 const List = styled.ul`
-  max-width: 120rem;
+  flex-grow: 1;
   padding: 0;
   margin: 0 auto;
   list-style: none;
@@ -15,14 +37,19 @@ const List = styled.ul`
   gap: 2rem;
 `;
 
-const ListItem = styled.li`
+export type LinkProps = {
+  active: boolean;
+};
+
+const ListItem = styled.li<LinkProps>`
   font-size: 2rem;
   font-weight: 400;
   color: ${({ theme }) => theme.colors.light};
+  color: ${({ theme, active }) => (active ? theme.colors.light : theme.colors.accentL)};
 
   &:hover {
-    color: ${({ theme }) => theme.colors.accent};
+    color: ${({ theme }) => theme.colors.light};
   }
 `;
 
-export { Container, List, ListItem };
+export { Container, List, ListItem, Logo };

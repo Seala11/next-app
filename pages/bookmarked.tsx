@@ -7,6 +7,7 @@ import { IMovie } from '../shared/api/types';
 import { useAppContext } from '../shared/context/appProvider';
 import { BookmarkedProviderActions } from '../shared/context/bookmarkedPageReducer';
 import { Message, Title } from '../shared/styles/sharedstyles';
+import { motion } from 'framer-motion';
 
 export default function BookMarked({ bookmarked }: InferGetStaticPropsType<typeof getStaticProps>) {
   const { bookmarkedPageState, bookmarkedPageDispatch } = useAppContext();
@@ -26,7 +27,15 @@ export default function BookMarked({ bookmarked }: InferGetStaticPropsType<typeo
       <Meta title="Bookmarked Movies" />
       {bookmarkedMovies && (
         <>
-          <Title>Bookmarked Movies</Title>
+          <Title
+            as={motion.h2}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.25, ease: 'easeInOut' }}
+          >
+            Bookmarked Movies
+          </Title>
           {bookmarkedMovies && bookmarkedMovies.length > 0 ? (
             <BookmarkedList bookmarked={bookmarkedMovies} />
           ) : (

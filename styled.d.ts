@@ -1,4 +1,4 @@
-import 'styled-components'
+import 'styled-components';
 
 declare module 'styled-components' {
   export interface DefaultTheme {
@@ -6,6 +6,7 @@ declare module 'styled-components' {
       dark: string;
       darkL: string;
       accent: string;
+      accentL: string;
       light: string;
     };
   }

@@ -5,6 +5,7 @@ import { fetchMovies } from '../shared/api/themoviedbApi';
 import { IMovies } from '../shared/api/types';
 import { useEffect } from 'react';
 import { useAppContext } from '../shared/context/appProvider';
+import { motion } from 'framer-motion';
 
 export default function Movies({ movies }: InferGetStaticPropsType<typeof getStaticProps>) {
   const { moviesRes, setMoviesRes, setPage } = useAppContext();
@@ -20,7 +21,15 @@ export default function Movies({ movies }: InferGetStaticPropsType<typeof getSta
     <>
       {moviesRes && moviesRes.length > 0 && (
         <>
-          <Title>Popular Movies</Title>
+          <Title
+            as={motion.h2}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.25, ease: 'easeInOut' }}
+          >
+            Popular Movies
+          </Title>
           <MoviesList movies={moviesRes} />
         </>
       )}

@@ -6,8 +6,7 @@ import { fetchAddMovie, fetchRemoveMovie } from '../../shared/api/moviesApi';
 import { IMovie } from '../../shared/api/types';
 import { useAppContext } from '../../shared/context/appProvider';
 import { Card, MarkButton } from './movieCard.styled';
-import { MdOutlineBookmarkAdd } from 'react-icons/md';
-import { MdOutlineBookmarkRemove } from 'react-icons/md';
+import { MdOutlineBookmarkAdd, MdOutlineBookmarkRemove } from 'react-icons/md';
 import { motion } from 'framer-motion';
 import { BookmarkedProviderActions } from '../../shared/context/bookmarkedPageReducer';
 
@@ -23,7 +22,7 @@ type Props = {
 
 export default function MovieCard({ movie, page }: Props) {
   const [pending, setPending] = useState(false);
-  const { bookmarkedPageState, bookmarkedPageDispatch } = useAppContext();
+  const { bookmarkedPageDispatch } = useAppContext();
 
   const date = new Date(movie.release_date).toLocaleString('en-US', {
     month: 'short',
@@ -95,7 +94,7 @@ export default function MovieCard({ movie, page }: Props) {
         whileInView={{ opacity: 1 }}
         exit={{ opacity: 0 }}
         viewport={{ once: true }}
-        transition={{ delay: 0.1, type: 'spring', stiffness: 60 }}
+        transition={{ delay: 0.1, type: 'spring', stiffness: 30 }}
         whileHover={{ scale: 1.06, transition: { ease: 'easeOut' } }}
         layout
       >
