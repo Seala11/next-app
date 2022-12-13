@@ -7,7 +7,6 @@ type Props = {
 
 const Container = styled.div<Props>`
   width: 100vw;
-  height: calc(100vh - 17.6rem);
   background-image: ${({ src }) => `linear-gradient(#1b1e2eb8, #10141f), url(${src})`};
   background-position: top;
   background-repeat: no-repeat;
