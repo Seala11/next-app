@@ -23,7 +23,7 @@ type Props = {
 
 export default function MovieCard({ movie, page, index }: Props) {
   const [pending, setPending] = useState(false);
-  const [src, setSrc] = React.useState(`https://image.tmdb.org/t/p/w500${movie.poster_path}`);
+  const [src, setSrc] = React.useState(`https://image.tmdb.org/t/p/w5000${movie.poster_path}`);
   const { bookmarkedPageDispatch } = useAppContext();
 
   const date = new Date(movie.release_date).toLocaleString('en-US', {
@@ -103,8 +103,8 @@ export default function MovieCard({ movie, page, index }: Props) {
         <Image
           src={src}
           alt={`${movie.title} poster`}
-          width={256}
-          height={342}
+          width={200}
+          height={300}
           sizes="(max-width: 768px) 160px,
           (max-width: 480px) 140px,
           200px"

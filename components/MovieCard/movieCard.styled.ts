@@ -25,14 +25,17 @@ export const Card = styled.div`
   img {
     border-radius: 1rem;
     width: 20rem;
-    height: auto;
+    height: 30rem;
+    aspect-ratio: auto;
 
     @media ${device.tablet} {
       width: 16rem;
+      height: 24rem;
     }
 
     @media ${device.mobile} {
       width: 14rem;
+      height: 21rem;
     }
   }
 
