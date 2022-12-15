@@ -26,7 +26,7 @@ export const Card = styled.div`
     border-radius: 1rem;
     width: 20rem;
     height: 30rem;
-    aspect-ratio: auto;
+    aspect-ratio: 0.71;
 
     @media ${device.tablet} {
       width: 16rem;

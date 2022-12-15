@@ -25,7 +25,7 @@ export default function BookMarked({ bookmarked }: InferGetStaticPropsType<typeo
   return (
     <>
       <Meta title="Bookmarked Movies" />
-      {bookmarkedMovies && (
+      {bookmarkedMovies && !pending && (
         <>
           <Title
             as={motion.h2}
