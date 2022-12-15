@@ -23,7 +23,7 @@ type Props = {
 
 export default function MovieCard({ movie, page, index }: Props) {
   const [pending, setPending] = useState(false);
-  const [src, setSrc] = React.useState(`https://image.tmdb.org/t/p/w5000${movie.poster_path}`);
+  const [src, setSrc] = React.useState(`https://image.tmdb.org/t/p/w500${movie.poster_path}`);
   const { bookmarkedPageDispatch } = useAppContext();
 
   const date = new Date(movie.release_date).toLocaleString('en-US', {
