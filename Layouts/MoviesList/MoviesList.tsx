@@ -31,8 +31,8 @@ export default function MoviesList({ movies }: Props) {
   return (
     <>
       <FlexContainer>
-        {movies.map((movie) => (
-          <MovieCard key={movie.id} movie={movie} page={Page.MOVIES} />
+        {movies.map((movie, index) => (
+          <MovieCard key={movie.id} movie={movie} page={Page.MOVIES} index={index} />
         ))}
       </FlexContainer>
       <LoadButton onClick={dataHandler}>Load more</LoadButton>

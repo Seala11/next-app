@@ -60,6 +60,7 @@ const Movie = ({ movie }: Props) => {
             alt={`${movie.title} poster`}
             width={300}
             height={450}
+            priority
           />
 
           <InfoContainer>

@@ -18,10 +18,12 @@ export enum Page {
 type Props = {
   movie: IMovie;
   page: Page;
+  index: number;
 };
 
-export default function MovieCard({ movie, page }: Props) {
+export default function MovieCard({ movie, page, index }: Props) {
   const [pending, setPending] = useState(false);
+  const [src, setSrc] = React.useState(`https://image.tmdb.org/t/p/w500${movie.poster_path}`);
   const { bookmarkedPageDispatch } = useAppContext();
 
   const date = new Date(movie.release_date).toLocaleString('en-US', {
@@ -86,7 +88,7 @@ export default function MovieCard({ movie, page }: Props) {
   };
 
   return (
-    <Link href="/movie/[id]" as={`/movie/${movie.id}`} >
+    <Link href="/movie/[id]" as={`/movie/${movie.id}`}>
       <Card
         key={movie.id}
         as={motion.div}
@@ -99,21 +101,28 @@ export default function MovieCard({ movie, page }: Props) {
         layout
       >
         <Image
-          src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+          src={src}
           alt={`${movie.title} poster`}
-          width={200}
-          height={300}
+          width={256}
+          height={342}
+          sizes="(max-width: 768px) 160px,
+          (max-width: 480px) 140px,
+          200px"
+          placeholder="blur"
+          blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mMsKppeDwAE1QH8Cs9AOAAAAABJRU5ErkJggg=="
+          onError={() => setSrc('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mO0d8+sBwADLAFwmhbF1gAAAABJRU5ErkJggg==')}
+          priority={index < 10 ? true : false}
         />
         <h2>{movie.title}</h2>
         <p>{date}</p>
         {page === Page.MOVIES && (
-          <MarkButton onClick={addMovieHandler} disabled={pending}>
+          <MarkButton onClick={addMovieHandler} disabled={pending} aria-label="add to bookmarked">
             <MdOutlineBookmarkAdd />
           </MarkButton>
         )}
 
         {page === Page.BOOKMARKED && (
-          <MarkButton onClick={removeMovieHandler} disabled={pending}>
+          <MarkButton onClick={removeMovieHandler} disabled={pending} aria-label="remove from bookmarked">
             <MdOutlineBookmarkRemove />
           </MarkButton>
         )}

@@ -10,8 +10,8 @@ type Props = {
 const BookmarkedList = ({ bookmarked }: Props) => {
   return (
     <FlexContainer>
-        {bookmarked.map((movie) => (
-          <MovieCard key={movie.id} movie={movie} page={Page.BOOKMARKED} />
+        {bookmarked.map((movie, index) => (
+          <MovieCard key={movie.id} movie={movie} page={Page.BOOKMARKED} index={index} />
         ))}
     </FlexContainer>
   );

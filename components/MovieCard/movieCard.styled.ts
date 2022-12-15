@@ -13,26 +13,26 @@ export const Card = styled.div`
   position: relative;
   margin: 0 auto;
 
-  @media  ${device.tablet}  {
+  @media ${device.tablet} {
     width: 16rem;
     min-height: 30rem;
   }
 
-  @media  ${device.mobile}  {
+  @media ${device.mobile} {
     width: 14rem;
   }
 
   img {
     border-radius: 1rem;
+    width: 20rem;
+    height: auto;
 
-    @media  ${device.tablet}  {
+    @media ${device.tablet} {
       width: 16rem;
-      height: auto;
     }
 
     @media ${device.mobile} {
       width: 14rem;
-      height: auto;
     }
   }
 
@@ -66,7 +66,7 @@ export const MarkButton = styled.button`
   align-items: center;
   transition: all 0.15s ease-in-out;
 
-  @media  ${device.tablet}  {
+  @media ${device.tablet} {
     top: 1rem;
     right: 1rem;
   }
