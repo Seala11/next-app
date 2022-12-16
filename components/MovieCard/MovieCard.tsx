@@ -5,7 +5,7 @@ import { toast } from 'react-toastify';
 import { fetchAddMovie, fetchRemoveMovie } from '../../shared/api/moviesApi';
 import { IMovie } from '../../shared/api/types';
 import { useAppContext } from '../../shared/context/appProvider';
-import { Card, MarkButton } from './movieCard.styled';
+import { Card, ImageWrapper, MarkButton } from './movieCard.styled';
 import { MdOutlineBookmarkAdd, MdOutlineBookmarkRemove } from 'react-icons/md';
 import { motion } from 'framer-motion';
 import { BookmarkedProviderActions } from '../../shared/context/bookmarkedPageReducer';
@@ -100,19 +100,24 @@ export default function MovieCard({ movie, page, index }: Props) {
         whileHover={{ scale: 1.06, transition: { ease: 'easeOut' } }}
         layout
       >
-        <Image
-          src={src}
-          alt={`${movie.title} poster`}
-          width={384}
-          height={538}
-          sizes="(max-width: 768px) 160px,
-          (max-width: 480px) 140px,
+        <ImageWrapper>
+          <Image
+            src={src}
+            alt={`${movie.title} poster`}
+            fill
+            sizes="(max-width: 480px) 140px,
+          (max-width: 768px) 160px,
           200px"
-          placeholder="blur"
-          blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mMsKppeDwAE1QH8Cs9AOAAAAABJRU5ErkJggg=="
-          onError={() => setSrc('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mO0d8+sBwADLAFwmhbF1gAAAABJRU5ErkJggg==')}
-          priority={index < 10 ? true : false}
-        />
+            placeholder="blur"
+            blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mMsKppeDwAE1QH8Cs9AOAAAAABJRU5ErkJggg=="
+            onError={() =>
+              setSrc(
+                'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mO0d8+sBwADLAFwmhbF1gAAAABJRU5ErkJggg=='
+              )
+            }
+            priority={index < 10 ? true : false}
+          />
+        </ImageWrapper>
         <h2>{movie.title}</h2>
         <p>{date}</p>
         {page === Page.MOVIES && (
@@ -122,7 +127,11 @@ export default function MovieCard({ movie, page, index }: Props) {
         )}
 
         {page === Page.BOOKMARKED && (
-          <MarkButton onClick={removeMovieHandler} disabled={pending} aria-label="remove from bookmarked">
+          <MarkButton
+            onClick={removeMovieHandler}
+            disabled={pending}
+            aria-label="remove from bookmarked"
+          >
             <MdOutlineBookmarkRemove />
           </MarkButton>
         )}
