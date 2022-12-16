@@ -103,8 +103,8 @@ export default function MovieCard({ movie, page, index }: Props) {
         <Image
           src={src}
           alt={`${movie.title} poster`}
-          width={200}
-          height={300}
+          width={384}
+          height={538}
           sizes="(max-width: 768px) 160px,
           (max-width: 480px) 140px,
           200px"

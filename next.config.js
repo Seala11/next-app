@@ -20,6 +20,7 @@ const nextConfig = {
         pathname: '/t/p/**',
       },
     ],
+    deviceSizes: [480, 640, 768, 1024],
   },
 };
 
