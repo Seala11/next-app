@@ -106,8 +106,9 @@ export default function MovieCard({ movie, page, index }: Props) {
             alt={`${movie.title} poster`}
             fill
             sizes="(max-width: 480px) 140px,
-          (max-width: 768px) 160px,
-          200px"
+                   (max-width: 768px) 160px,
+                    200px"
+            quality={50}
             placeholder="blur"
             blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mMsKppeDwAE1QH8Cs9AOAAAAABJRU5ErkJggg=="
             onError={() =>
