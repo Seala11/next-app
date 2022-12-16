@@ -41,16 +41,16 @@ export const Card = styled.div`
 export const ImageWrapper = styled.div`
   position: relative;
   border-radius: 1rem;
-  /* width: 20rem; */
+  width: 20rem;
   height: 30rem;
 
   @media ${device.tablet} {
-    /* width: 16rem; */
+    width: 16rem;
     height: 24rem;
   }
 
   @media ${device.mobile} {
-    /* width: 14rem; */
+    width: 14rem;
     height: 21rem;
   }
 

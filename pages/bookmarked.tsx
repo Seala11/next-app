@@ -19,7 +19,6 @@ export default function BookMarked({ bookmarked }: InferGetStaticPropsType<typeo
     } else if (bookmarkedMovies.length > 0 && pending) {
       bookmarkedPageDispatch({ type: BookmarkedProviderActions.ADD_MOVIES, movies: [] });
     }
-    console.log(bookmarkedMovies, bookmarkedPageState, bookmarked);
   }, [bookmarked, bookmarkedMovies, bookmarkedPageDispatch, bookmarkedPageState, pending]);
 
   return (
