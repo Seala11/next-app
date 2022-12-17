@@ -1,6 +1,6 @@
 import { Title } from '../shared/styles/sharedstyles';
 import { InferGetStaticPropsType } from 'next';
-import MoviesList from '../Layouts/MoviesList/MoviesList';
+import MoviesList from '../layouts/MoviesList/MoviesList';
 import { fetchMovies } from '../shared/api/themoviedbApi';
 import { IMovies } from '../shared/api/types';
 import { useEffect } from 'react';

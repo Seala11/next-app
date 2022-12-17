@@ -1,6 +1,6 @@
 import type { AppProps } from 'next/app';
 import { DefaultTheme, ThemeProvider } from 'styled-components';
-import MainLayout from '../Layouts/MainLayout/MainLayout';
+import MainLayout from '../layouts/MainLayout/MainLayout';
 import GlobalStyle from '../shared/styles/globalstyles';
 import { Inter } from '@next/font/google';
 import { AppProvider } from '../shared/context/appProvider';

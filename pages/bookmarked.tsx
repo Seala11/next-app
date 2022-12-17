@@ -2,7 +2,7 @@ import { MongoClient } from 'mongodb';
 import { InferGetStaticPropsType } from 'next';
 import { useEffect } from 'react';
 import Meta from '../components/Meta';
-import BookmarkedList from '../Layouts/MoviesList/BookmarkedList';
+import BookmarkedList from '../layouts/MoviesList/BookmarkedList';
 import { IMovie } from '../shared/api/types';
 import { useAppContext } from '../shared/context/appProvider';
 import { BookmarkedProviderActions } from '../shared/context/bookmarkedPageReducer';
