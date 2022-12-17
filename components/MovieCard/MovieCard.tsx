@@ -52,7 +52,7 @@ export default function MovieCard({ movie, page, index }: Props) {
       if (err.message === '409') {
         toast.info(`${movie.title} already bookmarked`);
       } else {
-        toast.error('Oops, something went wrong...');
+        toast.error('Oops, something went wrong. Changes you made may not be saved');
         console.error(err);
       }
     } finally {
@@ -65,6 +65,7 @@ export default function MovieCard({ movie, page, index }: Props) {
     e.stopPropagation();
 
     setPending(true);
+    bookmarkedPageDispatch({ type: BookmarkedProviderActions.REMOVE_MOVIE, id: movie.id });
     try {
       const response = await fetchRemoveMovie(`${movie.id}`);
 
@@ -74,14 +75,11 @@ export default function MovieCard({ movie, page, index }: Props) {
       }
 
       await response.json();
-      bookmarkedPageDispatch({ type: BookmarkedProviderActions.REMOVE_MOVIE, id: movie.id });
     } catch (err) {
-      if (err.message === '404') {
-        bookmarkedPageDispatch({ type: BookmarkedProviderActions.REMOVE_MOVIE, id: movie.id });
-      } else {
-        toast.error('Oops, something went wrong...');
-        console.error(err);
+      if (err.message !== '404') {
+        toast.error('Oops, something went wrong. Changes you made may not be saved');
       }
+      console.error(err);
     } finally {
       setPending(false);
     }

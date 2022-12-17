@@ -38,6 +38,8 @@ const Movie = ({ movie }: Props) => {
 
   let languageNames = new Intl.DisplayNames(['en'], { type: 'language' });
 
+  const [src, setSrc] = React.useState(`https://image.tmdb.org/t/p/w500${movie.poster_path}`);
+
   return (
     <LazyMotion features={domAnimation}>
       <Container
@@ -51,10 +53,17 @@ const Movie = ({ movie }: Props) => {
           <Button onClick={() => router.back()}>Go Back</Button>
           <ImageContainer as={m.div} initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
             <Image
-              src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+              src={src}
               alt={`${movie.title} poster`}
               width={300}
               height={450}
+              placeholder="blur"
+              blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mMsKppeDwAE1QH8Cs9AOAAAAABJRU5ErkJggg=="
+              onError={() =>
+                setSrc(
+                  'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mO0d8+sBwADLAFwmhbF1gAAAABJRU5ErkJggg=='
+                )
+              }
               priority
             />
 
