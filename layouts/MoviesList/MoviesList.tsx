@@ -5,6 +5,7 @@ import { useAppContext } from '../../shared/context/appProvider';
 import { LoadButton } from '../../shared/styles/sharedstyles';
 import MovieCard, { Page } from '../../components/MovieCard/MovieCard';
 import { FlexContainer } from './moviesList.styled';
+import { toast } from 'react-toastify';
 
 type Props = {
   movies: IMovie[];
@@ -15,16 +16,29 @@ export default function MoviesList({ movies }: Props) {
 
   const dataHandler = async () => {
     try {
-      const res = await fetchMovies(`${page + 1}`);
-      const movies: IMovies = await res.json();
+      const result = await fetchMovies(`${page + 1}`);
 
-      const result = moviesRes.concat(
+      if (!result.ok) {
+        switch (result.status) {
+          case 401:
+          case 404: {
+            const err = await result.json();
+            throw new Error(err.status_message);
+          }
+          default: {
+            throw new Error('Something went wrong. Please try again later.');
+          }
+        }
+      }
+      const movies: IMovies = await result.json();
+
+      const moviesState = moviesRes.concat(
         movies.results.filter((x) => !moviesRes.some((y) => y.id == x.id))
       );
-      setMoviesRes(() => result);
+      setMoviesRes(() => moviesState);
       setPage(page + 1);
     } catch (err) {
-      console.error(err);
+      toast.error(`${err}`);
     }
   };
 
