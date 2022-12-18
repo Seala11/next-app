@@ -4,6 +4,13 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
   enabled: process.env.ANALYZE === 'true',
 })
 
+const withPWA = require('next-pwa')({
+  dest: 'public',
+  register: true,
+  skipWaiting: true,
+  disable: process.env.NODE_ENV === 'development',
+});
+
 const nextConfig = {
   reactStrictMode: true,
   env: {
@@ -13,8 +20,8 @@ const nextConfig = {
     styledComponents: true,
   },
   i18n: {
-    locales: ["en"],
-    defaultLocale: "en",
+    locales: ['en'],
+    defaultLocale: 'en',
   },
   images: {
     remotePatterns: [
@@ -28,4 +35,7 @@ const nextConfig = {
   },
 };
 
-module.exports = withBundleAnalyzer(nextConfig);
+module.exports = (_phase, { defaultConfig }) => {
+  const plugins = [withBundleAnalyzer, withPWA]
+  return plugins.reduce((acc, plugin) => plugin(acc), { ...nextConfig})
+}
