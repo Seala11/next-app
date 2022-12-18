@@ -2,7 +2,7 @@
 
 ## About
 
-Movie app made with [The Movie Database (TMDB) API](https://developers.themoviedb.org/3/getting-started/introduction), Next.js API Routes and MongoDB.
+Movie App is a PWA made with [The Movie Database (TMDB) API](https://developers.themoviedb.org/3/getting-started/introduction), Next.js API Routes and MongoDB.
 
 ## Key Features
 
@@ -27,11 +27,15 @@ Movie app made with [The Movie Database (TMDB) API](https://developers.themovied
 * TypeScript
 * Framer Motion
 
+## Lighthouse Metrics
+
+![image](https://user-images.githubusercontent.com/77016227/208317576-a3503383-f1c1-4472-8a98-2c87a0263b15.png)
+
 ## Setup and Running
 
 Change .env.example file to .env.local and replace example variables with your mongodb collection and [themoviedb token](https://www.themoviedb.org/settings/api)
 
-### Install dependencies:
+### Install dependencies
 
 ```bash
 $ npm install
@@ -42,3 +46,20 @@ $ npm install
 ```bash
 $ npm run dev
 ```
+
+### Prepare for production
+
+```bash
+$ npm run build
+```
+
+```bash
+$ npm run start // run build locally
+```
+
+### Run webpack bundle analyzer
+
+```bash
+$ ANALYZE=true npm run build
+```
+
