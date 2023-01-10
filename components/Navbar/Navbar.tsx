@@ -16,10 +16,10 @@ const Navbar = () => {
         </Logo>
         <List>
           <ListItem active={router.route === '/'}>
-            <Link href="/">Movies</Link>
+            <Link href="/" prefetch={false}>Movies</Link>
           </ListItem>
           <ListItem active={router.route === '/bookmarked'}>
-            <Link href="/bookmarked">Bookmarked</Link>
+            <Link href="/bookmarked" prefetch={false}>Bookmarked</Link>
           </ListItem>
         </List>
       </FlexContainer>
